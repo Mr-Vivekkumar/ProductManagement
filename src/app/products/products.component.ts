@@ -29,6 +29,8 @@ export class ProductsComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   totalProducts: number = 0;
+  // Make environment available to the template
+  readonly env = environment;
 
   private apiService = inject(ApiService);
   private fb = inject(FormBuilder);
