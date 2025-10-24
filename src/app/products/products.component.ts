@@ -8,6 +8,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { environment } from '../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -32,6 +33,7 @@ export class ProductsComponent implements OnInit {
   private apiService = inject(ApiService);
   private fb = inject(FormBuilder);
   private toastr = inject(ToastrService);
+environment: any;
 
   ngOnInit(): void {
     this.initForms();

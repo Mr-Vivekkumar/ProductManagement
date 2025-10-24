@@ -44,7 +44,8 @@ Example configuration:
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000/api',
-  fileUploadUrl: 'http://localhost:3000/api/upload'
+  fileUploadUrl: 'http://localhost:3000/api/upload',
+  fileServerUrl: 'http://localhost:4000'
 };
 ```
 
