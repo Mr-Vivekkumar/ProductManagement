@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.production-server.com/api',
-  fileServerUrl: 'https://api.production-server.com'
+  apiUrl: 'https://product-management-api-livid.vercel.app/',
+  fileServerUrl: 'https://product-management-api-livid.vercel.app/'
 };
