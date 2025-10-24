@@ -1,0 +1,140 @@
+<div class="container my-4">
+  <h2 class="text-center mb-4">Category Management</h2>
+  <div class="card mb-4">
+    <div class="card-header">Add New Category</div>
+    <div class="card-body">
+      <form #categoryForm="ngForm" (ngSubmit)="createCategory()">
+        <div class="form-group">
+          <label for="categoryName">Category Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="categoryName"
+            [(ngModel)]="newCategoryName"
+            name="newCategoryName"
+            #newCategoryNameRef="ngModel"
+            required
+            minlength="3"
+          />
+          <div
+            *ngIf="newCategoryNameRef.invalid && newCategoryNameRef.touched"
+            class="text-danger mt-1"
+          >
+            <small *ngIf="newCategoryNameRef.errors?.['required']"
+              >Category name is required.</small
+            >
+            <small *ngIf="newCategoryNameRef.errors?.['minlength']"
+              >Minimum 3 characters required.</small
+            >
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary mt-2"
+          [disabled]="categoryForm.invalid"
+        >
+          Add Category
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>Categories List</div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Category Name</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ category.name }}</td>
+            <td class="text-end">
+              <button
+                class="btn btn-sm btn-warning me-2"
+                (click)="editCategory(category)"
+              >
+                Edit
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="deleteCategory(category.id)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Edit category modal -->
+    <div
+      *ngIf="editingCategory"
+      class="modal fade show d-block"
+      tabindex="-1"
+      role="dialog"
+    >
+      <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Category</h5>
+            <button type="button" class="close" (click)="closeEditModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="editCategoryName">Category Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="editingCategory.name"
+                name="editCategoryName"
+                #editCategoryNameRef="ngModel"
+                required
+                minlength="3"
+              />
+              <div
+                *ngIf="
+                  editCategoryNameRef.invalid && editCategoryNameRef.touched
+                "
+                class="text-danger mt-1"
+              >
+                <small *ngIf="editCategoryNameRef.errors?.['required']"
+                  >Category name is required.</small
+                >
+                <small *ngIf="editCategoryNameRef.errors?.['minlength']"
+                  >Minimum 3 characters required.</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="closeEditModal()"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="updateCategory()"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
